@@ -1,22 +1,14 @@
 import { ref } from 'vue'
 import { projectFirestore } from '../firebase/config'
+import { doc, getDoc } from 'firebase/firestore'
 
-const getCurrentRead = async () => {
-    console.log('getCurrentRead')
-    const currentRead = ref(null)
-    const error = ref(null)
+const docRef = doc(projectFirestore, "books");
+const docSnap = await getDoc(docRef);
 
-    try {
-        const res = await projectFirestore.collection('books').get()
-        currentRead.value = res.docs.map(doc => {
-
-            return { ...doc.data(), id: doc.id }
-        })
-    } catch (err) {
-        error.value = err.message
-        console.log(error.value)
-    }
-
+if(docSnap.exists()) {
+    console.log("Doc data:", docSnap.data());
+} else {
+    console.log("none")
 }
 
-export default getCurrentRead
+export default useCollection

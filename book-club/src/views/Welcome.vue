@@ -1,15 +1,18 @@
 <template>
-  <div class="welcome container">
-    <h1>Welcome</h1>
+  <div>
+    <Navbar />
+    <div class="welcome container">
+      <h1>Welcome</h1>
 
-    <div v-if="showLogin">
-        <LoginForm @login="enterHome" />
-        <p>Don't have an account? <span @click="showLogin = false">Sign Up</span> here</p>
-    </div>
-    <div v-else>
-        <SignupForm @signup="enterHome" />
-        <p>Have an account? <span @click="showLogin = true">Login</span> here</p>
+      <div v-if="showLogin">
+          <LoginForm @login="enterHome" />
+          <p>Don't have an account? <span @click="showLogin = false">Sign Up</span> here</p>
+      </div>
+      <div v-else>
+          <SignupForm @signup="enterHome" />
+          <p>Have an account? <span @click="showLogin = true">Login</span> here</p>
 
+      </div>
     </div>
   </div>
 </template>
@@ -19,9 +22,10 @@ import SignupForm from '../components/SignupForm.vue'
 import LoginForm from '../components/LoginForm.vue'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import Navbar from '@/components/Navbar.vue'
 
 export default {
-    components: { SignupForm, LoginForm },
+    components: { SignupForm, LoginForm, Navbar },
     setup() {
         const showLogin = ref(true)
         const router = useRouter()

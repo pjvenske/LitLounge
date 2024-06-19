@@ -1,19 +1,21 @@
 <template>
   <div class="currentRead">
-    <h2>Current Read</h2>
-    <p>{{ currentRead }}</p>
+    <p>{{ addDoc }}</p>
   </div>
 </template>
 
 <script>
-import getCurrentRead from '@/composables/getCurrentRead';
+import useCollection from '@/composables/getCurrentRead';
+import { ref } from 'vue'
 
 export default {
    setup() {
-      const currentRead = getCurrentRead();
+    const book = ref('')
 
-      currentRead
-      console.log(currentRead)
+    const { addDoc, error } = useCollection('books')
+    console.log(addDoc)
+
+    return { book, addDoc, error }
    }
 }
 </script>

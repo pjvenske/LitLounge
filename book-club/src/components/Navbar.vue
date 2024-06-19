@@ -5,10 +5,10 @@
                 <h3>LitLounge</h3>
                 <img src="../assets/litLogo.svg">
             </div>
-            <div class="links">
+            <div v-if="user" class="links">
                 <router-link to="/home">Home</router-link>
             </div>
-            <div>
+            <div v-if="user">
                 <button @click="handleClick">Logout</button>
             </div>
         </div>
@@ -19,11 +19,14 @@
 <script>
 import useLogout from '@/composables/useLogout';
 import { useRouter } from 'vue-router'
+import getUser from '../composables/getUser'
 
 export default {
     setup() {
         const { logout, error } = useLogout()
         const router = useRouter()
+
+        const { user } = getUser()
 
         const handleClick = async () => {
             await logout()
@@ -32,7 +35,7 @@ export default {
             }
         }
 
-        return { logout, handleClick, error}
+        return { logout, handleClick, error, user}
     }
 
 }
