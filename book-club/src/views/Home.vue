@@ -4,7 +4,10 @@
         <div v-if="user">
             <h3>Hello {{ user.displayName }}</h3>
         </div>
-        <CurrentRead />
+        <div class="homeContainer">
+            <CurrentRead />
+            <MyBookclubs />
+        </div>
     </div>
 
 
@@ -17,9 +20,10 @@ import CurrentRead from '../components/CurrentRead.vue'
 import getUser from '../composables/getUser.js'
 import { watch } from 'vue'
 import { useRouter } from 'vue-router'
+import MyBookclubs from '../components/MyBookclubs.vue'
 
 export default {
-    components: { Navbar, CurrentRead },
+    components: { Navbar, CurrentRead, MyBookclubs },
     setup() {
         const { user } = getUser()
         const router = useRouter()
@@ -39,5 +43,9 @@ export default {
 </script>
 
 <style>
+.homeContainer {
+    display: flex;
+    justify-content: space-between;
+}
 
 </style>

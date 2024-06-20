@@ -14,10 +14,18 @@
 <script>
 import { ref } from 'vue'
 import useSignup from '../composables/useSignup'
+// import useCollection from '@/composables/useCollection'
 
 export default {
     setup(props, context) {
         const { error, signup } = useSignup()
+        // const userData = useCollection('user-data')
+
+        // const addUser = () => {
+        //     const clubs = userData.documents.add(doc)
+
+        //     return clubs
+        // }
 
         //refs
         const displayName = ref('')
