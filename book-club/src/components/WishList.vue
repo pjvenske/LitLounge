@@ -21,8 +21,8 @@
   
     const currentUserData = userData.documents.value.find((doc) => doc.id == user.value.uid)
     const currentBookclub = bookclub.documents.value.find((doc) => doc.id == currentUserData?.bookclubId)
-    const wishList = book.documents.value.find((doc) => doc.id == currentBookclub?.wishList)
-    console.log(currentBookclub?.wishList)
+    const wishList = bookclub.documents.value.find((doc) => doc.id == currentBookclub?.wishList)
+    // console.log(currentBookclub?.wishList)
 
     console.log(wishList)
     

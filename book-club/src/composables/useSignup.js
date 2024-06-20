@@ -22,6 +22,20 @@ const signup = async (email, password, displayName) => {
         console.log(err.message)
         error.value = err.message
     }
+
+    const addDoc = async (doc) => {
+        error.value = null
+    
+        try {
+          await projectFirestore.collection('user-data').add(doc)
+        }
+        catch(err) {
+          console.log(err.message)
+          error.value = 'could not send the message'
+        }
+      }
+
+      return { addDoc }
 }
 
 const useSignup = () => {
