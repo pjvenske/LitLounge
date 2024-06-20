@@ -1,12 +1,8 @@
 <template>
     <div class="currentRead">
-      <h1>Current Read:</h1>
-      <img :src="showCurrentRead()?.img">
-      <div class="desc">
-        <h2>{{ showCurrentRead()?.title }}</h2>
-        <h3>{{ showCurrentRead()?.author }}</h3>
-        <p>{{ showCurrentRead()?.desc }}</p>
-      </div>
+      <h1>Wish List:</h1>
+    
+        <h2>{{ showWishList()?.wishList }}</h2>
     </div>
   </template>
   
@@ -21,16 +17,17 @@
   const { user } = getUser()
   
   
-  const showCurrentRead = () => {
+  const showWishList = () => {
   
     const currentUserData = userData.documents.value.find((doc) => doc.id == user.value.uid)
-    // console.log(currentUserData)
-    // console.log(userData)
-    // console.log(user.value.uid)
     const currentBookclub = bookclub.documents.value.find((doc) => doc.id == currentUserData?.bookclubId)
-    const currentRead = book.documents.value.filter((doc) => doc.id == currentBookclub?.wishlist)
-  
-    return currentRead
+    const wishList = book.documents.value.find((doc) => doc.id == currentBookclub?.wishList)
+    console.log(currentBookclub?.wishList)
+
+    console.log(wishList)
+    
+    return wishList
+
   }
   </script>
   

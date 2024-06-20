@@ -24,9 +24,6 @@ const { user } = getUser()
 const showCurrentRead = () => {
 
   const currentUserData = userData.documents.value.find((doc) => doc.id == user.value.uid)
-  // console.log(currentUserData)
-  // console.log(userData)
-  // console.log(user.value.uid)
   const currentBookclub = bookclub.documents.value.find((doc) => doc.id == currentUserData?.bookclubId)
   const currentRead = book.documents.value.find((doc) => doc.id == currentBookclub?.currentRead)
 

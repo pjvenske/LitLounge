@@ -26,16 +26,13 @@ const goToClub = () => {
     const currentBookclub = bookclub.documents.value.find((doc) => doc.id == currentUserData?.bookclubId);
 
     if (currentBookclub) {
-        router.push({ name: 'bookclub', params: { id: currentBookclub.id } });
+      router.push({path: '/bookclub/$currentBookclub.id'})
     }
 }
 
 const showCurrentRead = () => {
 
   const currentUserData = userData.documents.value.find((doc) => doc.id == user.value.uid)
-  // console.log(currentUserData)
-  // console.log(userData)
-  // console.log(user.value.uid)
   const currentBookclub = bookclub.documents.value.find((doc) => doc.id == currentUserData?.bookclubId)
 
   return currentBookclub
