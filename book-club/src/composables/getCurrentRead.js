@@ -1,14 +1,32 @@
-import { ref } from 'vue'
-import { projectFirestore } from '../firebase/config'
-import { doc, getDoc } from 'firebase/firestore'
+import { ref } from 'vue';
+import { projectFirestore } from '../firebase/config';
 
-const docRef = doc(projectFirestore, "books");
-const docSnap = await getDoc(docRef);
+const getCollection = (collection) => {
 
-if(docSnap.exists()) {
-    console.log("Doc data:", docSnap.data());
-} else {
-    console.log("none")
+  const documents = ref(null)
+  const error = ref(null)
+
+  // register the firestore collection reference
+  let collectionRef = projectFirestore.collection(collection)
+
+  collectionRef.onSnapshot(snap => {
+    let results = [];
+    snap.docs.forEach(doc => {
+      // must wait for the server to create the timestamp & send it back
+      // we don't want to edit data until it has done this
+      doc.data().createdAt && results.push({...doc.data(), id: doc.id})
+    });
+    
+    // update values
+    documents.value = results;
+    error.value = null;
+  }, err => {
+    console.log(err.message)
+    documents.value = null
+    error.value = 'could not fetch the data'
+  })
+
+  return { error, documents }
 }
 
-export default useCollection
+export default getCollection

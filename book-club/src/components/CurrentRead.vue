@@ -1,22 +1,26 @@
 <template>
   <div class="currentRead">
-    <p>{{ addDoc }}</p>
+    <!-- <p>{{ showCurrentRead() }}</p> -->
   </div>
 </template>
 
-<script>
-import useCollection from '@/composables/getCurrentRead';
-import { ref } from 'vue'
+<script setup>
 
-export default {
-   setup() {
-    const book = ref('')
+import useCollection from '../composables/useCollection'
+import getUser from '../composables/getUser'
 
-    const { addDoc, error } = useCollection('books')
-    console.log(addDoc)
+   
+// const { addDoc, error } = useCollection('bookclub')
+// const { user } = getUser()
 
-    return { book, addDoc, error }
-   }
+// console.log('user is', user.value.displayName)
+
+const showCurrentRead = () => {
+  const currentBook = {
+    title: 'test'
+  }
+
+  return currentBook
 }
 </script>
 

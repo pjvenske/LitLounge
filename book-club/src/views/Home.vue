@@ -29,6 +29,8 @@ export default {
                 router.push({ name: 'welcome' })
             }
         })
+        
+        console.log('current user', user.value.displayName)
 
         return { user }
     }
