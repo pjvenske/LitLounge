@@ -7,6 +7,7 @@
             </div>
             <div v-if="user" class="links">
                 <router-link to="/home">Home</router-link>
+                <router-link to="/clubmenu">Clubs</router-link>
             </div>
             <div v-if="user">
                 <button @click="handleClick">Logout</button>

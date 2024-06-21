@@ -1,11 +1,16 @@
 <template>
-  <p>club menu</p>
+  <div>
+    <Navbar />
+    <p>club menu</p>
+    <SearchClubs />
+  </div>
 </template>
 
-<script>
-export default {
+<script setup>
+import SearchClubs from '../components/SearchClubs.vue'
+import Navbar from '@/components/Navbar.vue';
 
-}
+components: { SearchClubs, Navbar }
 </script>
 
 <style>

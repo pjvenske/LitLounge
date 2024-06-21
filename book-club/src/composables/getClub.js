@@ -22,4 +22,5 @@ const getClub = (id) => {
 }
 
 
+
 export default getClub

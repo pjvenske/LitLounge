@@ -9,7 +9,7 @@ const getClubs = () => {
   const load = async () => {
     try {
       const res = await projectFirestore.collection('bookclubs').get()
-      // console.log(res.docs)
+      console.log(res.docs)
 
       clubs.value = res.docs.map(doc => {
         // console.log(doc.data())
@@ -21,7 +21,7 @@ const getClubs = () => {
     }
   }
 
-  return { posts: clubs, error, load }
+  return { clubs, error, load }
 }
 
 export default getClubs

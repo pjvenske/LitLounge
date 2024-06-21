@@ -3,6 +3,7 @@ import Welcome from '../views/Welcome.vue'
 import Home from '../views/Home.vue'
 import { projectAuth } from '../firebase/config'
 import BookDetails from '../views/BookDetails.vue'
+import ClubMenu from '../views/ClubMenu.vue'
 
 //auth guard
 const requireAuth = (to, from, next) => {
@@ -30,6 +31,11 @@ const routes = [
     path: '/bookclub/:id',
     name: 'booklclub',
     component: BookDetails,
+  },
+  {
+    path: '/clubmenu',
+    name: 'clubmenu',
+    component: ClubMenu
   }
 ]
 
