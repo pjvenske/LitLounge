@@ -2,9 +2,9 @@
   <div>
     <Navbar />
     <div class="club">
-      <p>{{ showClub()?.name }}</p>
+      <h1>{{ showClub()?.name }}</h1>
     </div>
-    <div>
+    <div class="clubContainer">
       <CurrentRead />
       <WishList />
     </div>
@@ -34,5 +34,8 @@ const showClub = () => {
 </script>
 
 <style>
+.clubContainer {
+  display: flex;
+}
 
 </style>

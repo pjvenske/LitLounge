@@ -1,5 +1,5 @@
 <template>
-    <div class="clubs">
+    <div class="clubSelection">
         <!-- <div>
             <form>
                 <h3>Create a new Club</h3>
@@ -56,7 +56,7 @@ const joinClub = async (clubId) => {
             let userData = doc.data();
             if (userData.bookclubId) {
                 // If the user already has bookclubId, append the new clubId
-                if (!userData.bookclubId) {
+                if (!userData.bookclubId.includes(clubId)) {
                     userData.bookclubId.push(clubId);
                     await userDocRef.update({ bookclubId: userData.bookclubId });
                 }
@@ -73,27 +73,31 @@ const joinClub = async (clubId) => {
     }
 };
 
-const addClub = async (clubName) => {
-  if (!clubName) return; // Basic validation
-  const newClub = {
-    name: clubName,
-    members: [user.value.uid], // Ensure user.value.uid is correctly obtained
-    currentRead: '',
-    wishList: []
-  };
-  try {
-    const addedClub = await useCollection('bookclub', newClub); // Add the new club to the 'bookclub' collection
-    clubs.value.push(addedClub); // Optionally update the local state to reflect the new club
-    alert('Club added successfully!');
-  } catch (error) {
-    console.error('Failed to add club:', error);
-    alert(`Failed to add club. Please try again. Error: ${error.message}`);
-  }
+
+const addNewClub = async(projectFirestore, clubId) => {
+    try {
+        // Directly use Firestore's collection method to get a reference to 'user-data' collection
+        const userDocRef = projectFirestore.collection('clubs').doc(clubs.value.id);
+        const doc = await userDocRef.get();
+
+        if (doc.exists) {
+          let bookclub = doc.data();
+          // Initialize bookclubId as an array if it doesn't exist
+          bookclub.bookclubId = bookclub.bookclubId || [];
+          // Check if clubId is not already in the bookclubId array
+          if (!bookclub.bookclubId.includes(clubId)) {
+            bookclub.bookclubId.push(clubId);
+            await userDocRef.update({ bookclubId: bookclub.bookclubId });
+            console.log(`Club with ID: ${clubId} added to the user's bookclubId`);
+          }
+        } else {
+          console.log("User document doesn't exist.");
+        }
+      } catch (error) {
+        console.error("Error updating user's bookclubId:", error);
+      }
 };
 
-const addNewClub = () => {
-  addClub(newClubName.value);
-};
 
 const goToClub = (clubId) => {
     router.push({ path: `/bookclub/$${clubId}` });
@@ -102,7 +106,33 @@ const goToClub = (clubId) => {
 </script>
 
 <style>
-.clubs {
+.clubSelection {
+    color: #63372c;
+    background: #C97D60;
+    padding: 10px;
+    width: 90%;
+    align-items: center;
+    margin: auto;
+    border-radius: 10px;
+
+}
+
+ul {
+    padding: 10px; 
+    list-style-type: none; 
+}
+
+li {
+  margin-right: 10px; 
+  padding: 10px;
+}
+
+button {
+    background-color: #FFBCB5;
+    border-radius: 30px;
+    text-decoration: none;
+    border: 0;
+    padding: 8px;
     color: #63372c;
 }
 </style>

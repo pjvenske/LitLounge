@@ -1,7 +1,7 @@
 <template>
   <div>
     <Navbar />
-    <p>club menu</p>
+    <h1>Club Menu</h1>
     <SearchClubs />
   </div>
 </template>
@@ -14,5 +14,8 @@ components: { SearchClubs, Navbar }
 </script>
 
 <style>
-
+h1 {
+  color: #63372C;
+  text-align: center;
+}
 </style>

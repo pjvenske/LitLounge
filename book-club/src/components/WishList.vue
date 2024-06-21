@@ -52,20 +52,12 @@ const showWishList = () => {
 }
 .wishList ul {
   display: flex;
-  flex-wrap: wrap;
   padding: 0;
   list-style-type: none;
-  justify-content: space-between; /* Adjusts spacing between items */
+  justify-content: space-between; /* This spreads the items evenly across the container */
+  align-items: center; /* This vertically centers the items */
+  gap: 10px; /* Adjust the gap as needed */
 }
 
-.wishList li {
-  margin-right: 10px; 
-  width: calc(33.33% - 20px); 
-  margin-bottom: 10px;
-}
-
-.wishList li:nth-child(3n) {
-  margin-right: 0;
-}
   
 </style>

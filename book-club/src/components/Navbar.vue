@@ -6,9 +6,9 @@
                 <img src="../assets/litLogo.svg">
             </div>
             <div v-if="user" class="links">
-                <router-link to="/home">Home</router-link>
-                <router-link to="/clubmenu">Clubs</router-link>
-                <router-link to="/search">Search</router-link>
+                <router-link to="/home"><img src="../assets/🦆 icon _home_.svg"></router-link>
+                <router-link to="/clubmenu"><img src="../assets/🦆 icon _book_.svg"></router-link>
+                <router-link to="/search"><img src="../assets/🦆 icon _magnifying glass_.svg"></router-link>
             </div>
             <div v-if="user">
                 <button @click="handleClick">Logout</button>
@@ -49,8 +49,11 @@ export default {
     justify-content: space-between;
     align-items: center;
     background-color: #63372C;
-    padding: 0;
+    padding: 20px;
     margin: 0;
+    height:100px;
+    width: 100vw;
+    box-sizing: border-box;
 }
 
 .logo {
@@ -61,7 +64,9 @@ export default {
 }
 
 .links {
+    display: flex;
+    gap: 30px;
     color: #C97D60;
-    font-size: 30px;
+    margin: auto;
 }
 </style>

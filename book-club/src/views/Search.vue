@@ -3,7 +3,9 @@
         <Navbar />
         <div class="books">
         <ul>
-            <li  v-for="book in books.documents" :key="book"><img :src="book?.img"></li>
+            <li  v-for="book in books.documents" :key="book" @click="selectBook(book)">
+                <img :src="book?.img">
+            </li>
         </ul>
         </div>
     </div>
@@ -12,12 +14,14 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import getCollection from '@/composables/getCollection';
+import { useRouter } from 'vue-router';
 import Navbar from '../components/Navbar.vue'
 
 components: {Navbar}
 
 const books = ref([]);
 const selectedBook = ref(null);
+const router = useRouter();
 
 onMounted(async () => {
   books.value = await getCollection('books');
@@ -27,7 +31,9 @@ onMounted(async () => {
 
 function selectBook(book) {
   selectedBook.value = book;
+  router.push(`/book/${book.id}`); // Use router.push to navigate
 }
+
 
 
 </script>
