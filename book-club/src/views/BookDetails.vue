@@ -1,36 +1,37 @@
 <template>
   <div>
-    <div class="club">
-      <p>{{ showClub()?.name }}</p>
-    </div>
-    <div>
-      <CurrentRead />
-      <WishList />
+    <div >
+      <h2>{{ getBookDetails()?.title }}</h2>
+      <h3>{{ getBookDetails()?.author }}</h3>
+      <p>{{ getBookDetails()?.desc }}</p>
     </div>
   </div>
 </template>
 
 <script setup>
-import getUser from '../composables/getUser'
-import getCollection from '@/composables/getCollection';
-import CurrentRead from '@/components/CurrentRead.vue';
-import WishList from '@/components/WishList.vue'
+import { useRoute } from 'vue-router'; // Step 1: Import useRoute
+import getCollection from '../composables/getCollection';
+// Import your data fetching library/method, e.g., a Firestore fetch method
 
-components: { CurrentRead, WishList }
-
-const bookclub = getCollection('bookclub')
-const userData = getCollection('user-data')
-const { user } = getUser()
+const route = useRoute();
+const book = getCollection('books')
 
 
-const showClub = () => {
-    const currentUserData = userData.documents.value.find((doc) => doc.id == user.value.uid);
-    const currentBookclub = bookclub.documents.value.find((doc) => doc.id == currentUserData?.bookclubId);
+const getBookDetails = () => {
+  const bookId = route.params.id;
+  const currentBook = book.documents.value.find((doc) => doc.id === bookId)
+  console.log(book.value)
 
-    return currentBookclub
-}
+  return currentBook
+};
+
+
 </script>
 
 <style>
+/* Style as needed */
+</style>
 
+<style>
+/* Style as needed */
 </style>

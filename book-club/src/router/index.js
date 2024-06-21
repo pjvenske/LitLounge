@@ -2,8 +2,10 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Welcome from '../views/Welcome.vue'
 import Home from '../views/Home.vue'
 import { projectAuth } from '../firebase/config'
-import BookDetails from '../views/BookDetails.vue'
+import ClubDetails from '../views/ClubDetails.vue'
 import ClubMenu from '../views/ClubMenu.vue'
+import Search from '../views/Search.vue'
+import BookDetails from '../views/BookDetails.vue'
 
 //auth guard
 const requireAuth = (to, from, next) => {
@@ -30,12 +32,23 @@ const routes = [
   {
     path: '/bookclub/:id',
     name: 'booklclub',
-    component: BookDetails,
+    component: ClubDetails,
   },
   {
     path: '/clubmenu',
     name: 'clubmenu',
     component: ClubMenu
+  },
+  {
+    path:'/search',
+    name: 'search',
+    component: Search
+
+  },
+  {
+    path: '/book/:id',
+    name: 'book',
+    component: BookDetails
   }
 ]
 
