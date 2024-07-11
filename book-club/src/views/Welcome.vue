@@ -9,7 +9,7 @@
           <p>Don't have an account? <span @click="showLogin = false">Sign Up</span> here</p>
       </div>
       <div v-else>
-          <SignupForm @signup="enterHome" />
+          <SignupForm @signup="enterClubsmenu" />
           <p>Have an account? <span @click="showLogin = true">Login</span> here</p>
 
       </div>
@@ -35,8 +35,12 @@ export default {
           router.push({ name: 'home' })
         }
 
+        const enterClubsmenu = () => {
+          router.push({ name: 'clubmenu' })
+        }
 
-        return { showLogin, enterHome }
+
+        return { showLogin, enterHome, enterClubsmenu }
     }
 }
 </script>

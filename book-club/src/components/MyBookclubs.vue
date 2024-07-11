@@ -1,5 +1,6 @@
 <template>
   <div class="clubs">
+    <h1>My book clubs:</h1>
     <div @click="goToClub" class="clubName">
         <p>{{ showCurrentRead()?.name }}</p>
     </div>
@@ -50,11 +51,18 @@ const showCurrentRead = () => {
 }
 
 .clubName {
+  display: flex;
+    justify-content: center;
+    align-items: center;
     border: 5px solid #FFBCB5;
     border-radius: 10px;
     height: 40%;
     text-align: center;
     color: #FFBCB5;
     font-size: 30px;
+}
+
+.clubName:hover {
+  cursor: pointer;
 }
 </style>

@@ -1,9 +1,10 @@
 <template>
     <div>
         <Navbar />
+        <h1>Browse our books:</h1>
         <div class="books">
         <ul>
-            <li  v-for="book in books.documents" :key="book" @click="selectBook(book)">
+            <li class="covers"  v-for="book in books.documents" :key="book" @click="selectBook(book)">
                 <img :src="book?.img">
             </li>
         </ul>
@@ -39,6 +40,14 @@ function selectBook(book) {
 </script>
 
 <style>
+.covers:hover {
+  cursor: pointer;
+}
+
+h1 {
+  text-align: left;
+}
+
 .books img{
     width: 150px
 }

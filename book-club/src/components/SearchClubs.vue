@@ -10,7 +10,7 @@
         <ul>
             <li @click="goToClub(club.id)" v-for="club in clubs.documents" :key="club">
                 {{ club?.name }}
-                <button @click.stop="joinClub(club.id)">Join Club</button>
+                <button class="clubBtn" @click.stop="joinClub(club.id)">Join Club</button>
             </li>
             
         </ul>
@@ -48,29 +48,28 @@ onMounted(async () => {
 const joinClub = async (clubId) => {
     console.log(`Joining club with ID: ${clubId}`);
     try {
-        // Directly use Firestore's collection method to get a reference to 'user-data' collection
-        const userDocRef = projectFirestore.collection('user-data').doc(user.value.uid);
-        const doc = await userDocRef.get();
+    const userDocRef = projectFirestore.collection('user-data').doc(user.value.uid);
+    const doc = await userDocRef.get();
 
-        if (doc.exists) {
-            let userData = doc.data();
-            if (userData.bookclubId) {
-                // If the user already has bookclubId, append the new clubId
-                if (!userData.bookclubId.includes(clubId)) {
-                    userData.bookclubId.push(clubId);
-                    await userDocRef.update({ bookclubId: userData.bookclubId });
-                }
-            } else {
-                // If the user doesn't have a bookclubId field, create it
-                await userDocRef.update({ bookclubId: [clubId] });
+    if (doc.exists) {
+        let userData = doc.data();
+        if (userData.bookclubId) {
+            if (!userData.bookclubId.includes(clubId)) {
+                userData.bookclubId.push(clubId);
+                await userDocRef.update({ bookclubId: userData.bookclubId });
             }
-            console.log(`Club with ID: ${clubId} added to the user's bookclubId`);
         } else {
-            console.log("User document doesn't exist.");
+            await userDocRef.update({ bookclubId: [clubId] });
         }
-    } catch (error) {
-        console.error("Error updating user's bookclubId:", error);
+        console.log(`Club with ID: ${clubId} added to the user's bookclubId`);
+        // Route to the joined clubs page after successful addition
+        router.push(`/bookclub/${clubId}`);
+    } else {
+        console.log("User document doesn't exist.");
     }
+} catch (error) {
+    console.error("Error updating user's bookclubId:", error);
+}
 };
 
 
@@ -115,6 +114,10 @@ const goToClub = (clubId) => {
     margin: auto;
     border-radius: 10px;
 
+}
+
+.clubBtn:hover {
+    cursor: pointer;
 }
 
 ul {

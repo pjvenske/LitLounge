@@ -33,22 +33,26 @@ const routes = [
     path: '/bookclub/:id',
     name: 'booklclub',
     component: ClubDetails,
+    beforeEnter: requireAuth,
   },
   {
     path: '/clubmenu',
     name: 'clubmenu',
-    component: ClubMenu
+    component: ClubMenu,
+    beforeEnter: requireAuth,
   },
   {
     path:'/search',
     name: 'search',
-    component: Search
+    component: Search,
+    beforeEnter: requireAuth,
 
   },
   {
     path: '/book/:id',
     name: 'book',
-    component: BookDetails
+    component: BookDetails,
+    beforeEnter: requireAuth,
   }
 ]
 

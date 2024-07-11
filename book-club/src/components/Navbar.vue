@@ -6,9 +6,9 @@
                 <img src="../assets/litLogo.svg">
             </div>
             <div v-if="user" class="links">
-                <router-link to="/home"><img src="../assets/🦆 icon _home_.svg"></router-link>
-                <router-link to="/clubmenu"><img src="../assets/🦆 icon _book_.svg"></router-link>
-                <router-link to="/search"><img src="../assets/🦆 icon _magnifying glass_.svg"></router-link>
+                <router-link class="homelinks" to="/home">Home</router-link>
+                <router-link class="clublinks" to="/clubmenu">Join a club!</router-link>
+                <router-link class="searchlinks" to="/search">Browse Books</router-link>
             </div>
             <div v-if="user">
                 <button @click="handleClick">Logout</button>
@@ -66,7 +66,52 @@ export default {
 .links {
     display: flex;
     gap: 30px;
-    color: #C97D60;
+}
+
+.homelinks, .links:visited{
+    display: flex;
+    font-size: 20px;
+    text-decoration: none;
+    gap: 30px;
+    color: #C97D60 !important;
     margin: auto;
 }
+
+.homelinks:hover {
+    text-decoration: underline;
+}
+
+.homelinks:active {
+    text-decoration: underline;
+}
+
+.clublinks, .links:visited{
+    display: flex;
+    font-size: 20px;
+    text-decoration: none;
+    gap: 30px;
+    color: #C97D60 !important;
+    margin: auto;
+}
+
+.clublinks:hover {
+    text-decoration: underline;
+}
+
+.searchlinks, .links:visited{
+    display: flex;
+    font-size: 20px;
+    text-decoration: none;
+    gap: 30px;
+    color: #C97D60 !important;
+    margin: auto;
+}
+
+.searchlinks:hover {
+    text-decoration: underline;
+}
+
+
+
+
 </style>
