@@ -1,7 +1,7 @@
 <template>
     <div>
         <Navbar />
-        <h1>Browse our books:</h1>
+        <h1 class="searchHeader">Browse our books:</h1>
         <div class="books">
         <ul>
             <li class="covers"  v-for="book in books.documents" :key="book" @click="selectBook(book)">
@@ -44,7 +44,7 @@ function selectBook(book) {
   cursor: pointer;
 }
 
-h1 {
+.searchHeader h1 {
   text-align: left;
 }
 
